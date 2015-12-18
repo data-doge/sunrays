@@ -1,1 +1,1 @@
-console.log('hi world')
+var layer = new Layer()
