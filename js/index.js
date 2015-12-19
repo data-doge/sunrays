@@ -34,11 +34,13 @@ var layerParams1 = {
   }
 }
 
-var layer0 = new Layer(layerParams0)
-var layer1 = new Layer(layerParams1)
+var layers = []
+layers.push(new Layer(layerParams0))
+layers.push(new Layer(layerParams1))
 
 $(document).on('keyup', function (e) {
-  if (e.keyCode === 32) {
-    layer0.toggleAnimation()
+  var layerNum = e.keyCode - 49
+  if (_.inRange(layerNum, 0, 9)) {
+    layers[layerNum].toggleAnimation()
   }
 })
