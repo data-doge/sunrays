@@ -10,6 +10,7 @@ Layer.prototype.loadParams = function (params) {
   this.printShape = params.printShape.bind(this)
   this.updateShape = params.updateShape.bind(this)
   this.isMoving = true
+  this.isDisplayed = true
   this.shapes = []
 }
 
@@ -46,8 +47,14 @@ Layer.prototype.updateShapes = function () {
 }
 
 Layer.prototype.toggleAnimation = function () {
-    this.isMoving = !this.isMoving
-    this.animate()
+  this.isMoving = !this.isMoving
+  if (this.isMoving) { this.animate() }
+}
+
+Layer.prototype.toggleDisplay = function () {
+  this.isMoving = !this.isMoving
+  this.isDisplayed ? this.clear() : this.animate()
+  this.isDisplayed = !this.isDisplayed
 }
 
 Layer.prototype.clear = function () {

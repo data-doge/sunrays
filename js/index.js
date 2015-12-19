@@ -44,6 +44,7 @@ var layerNum = 0;
 $(document).on('keyup', function (e) {
   if (_.inRange(e.keyCode, 49, 58)) {
     layerNum = e.keyCode - 49
+    layers[layerNum].toggleDisplay()
     $layerNum.text(layerNum + 1)
   }
 })
