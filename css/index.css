@@ -12,6 +12,7 @@ body {
   position: fixed;
   top: 0; left: 0; bottom: 0; right: 0;
   border: 100px solid black;
+  z-index: 1000;
 }
 
 canvas {
