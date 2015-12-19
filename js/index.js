@@ -1,10 +1,10 @@
-var layerParams0 = {
+var verticalLines = {
   generateShapes: function () {
-    var xOffset = 0, padding = 20, width = 100
+    var xOffset = 0, spacing = 1, width = 5
 
     while (xOffset < this.width) {
       this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
-      xOffset += width + padding
+      xOffset += width + spacing
     }
   },
   printShape: function (shape, index) {
@@ -16,17 +16,17 @@ var layerParams0 = {
   }
 }
 
-var layerParams1 = {
+var horizontalLines = {
   generateShapes: function () {
-    var yOffset = 0, padding = 10, height = 10
+    var yOffset = 0, spacing = 20, height = 10
 
     while (yOffset < this.height) {
       this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
-      yOffset += height + padding
+      yOffset += height + spacing
     }
   },
   printShape: function (shape, index) {
-    this.context.fillStyle = 'blue'
+    this.context.fillStyle = 'rgba(0,0,255,1)'
     this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
   },
   updateShape: function (shape, index) {
@@ -37,8 +37,8 @@ var layerParams1 = {
 var $layerNum = $('.layer-num')
 
 var layers = []
-layers.push(new Layer(layerParams0))
-layers.push(new Layer(layerParams1))
+layers.push(new Layer(verticalLines))
+layers.push(new Layer(horizontalLines))
 
 var layerNum = 0;
 $(document).on('keyup', function (e) {
