@@ -3,6 +3,7 @@ function Layer (params) {
   this.width = $(window).width()
   this.height = $(window).height()
   this.color = params.color || 'black'
+  this.isMoving = true
   this.shapes = []
   this.initialize()
 }
@@ -11,6 +12,7 @@ Layer.prototype.initialize = function () {
   this.prepareCanvas()
   this.generateShapes()
   this.printShapes()
+  this.animate()
 }
 
 Layer.prototype.prepareCanvas = function () {
@@ -23,7 +25,7 @@ Layer.prototype.prepareCanvas = function () {
 
 // will likely be a callback that we pass in for each distinct layer
 Layer.prototype.generateShapes = function () {
-  var xOffset = 0, padding = 20, width = 20
+  var xOffset = 0, padding = 30, width = 1
 
   while (xOffset + padding < this.width) {
     this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
@@ -40,6 +42,28 @@ Layer.prototype.printShape = function (shape, index) {
   this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
 }
 
+// will also likely be a callback that we pass into each distinct layer
 Layer.prototype.animate = function () {
-  // make their positions rotate
+  this.clear()
+  var width = this.width
+  this.shapes.forEach(function (shape, index) {
+    shape.x = (shape.x + 1) % width
+  })
+  if (this.isMoving) {
+    this.printShapes()
+    requestAnimationFrame(this.animate.bind(this))
+  }
+}
+
+Layer.prototype.toggleAnimation = function () {
+  if (this.isMoving) {
+    this.isMoving = false
+  } else {
+    this.isMoving = true
+    this.animate()
+  }
+}
+
+Layer.prototype.clear = function () {
+  this.context.clearRect(0, 0, this.width, this.height)
 }
