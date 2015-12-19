@@ -9,8 +9,9 @@ Layer.prototype.loadParams = function (params) {
   this.generateShapes = params.generateShapes.bind(this)
   this.printShape = params.printShape.bind(this)
   this.updateShape = params.updateShape.bind(this)
-  this.isMoving = true
   this.isDisplayed = true
+  this.isMoving = true
+  this.direction = 'forward'
   this.shapes = []
 }
 
@@ -59,4 +60,8 @@ Layer.prototype.toggleDisplay = function () {
 
 Layer.prototype.clear = function () {
   this.context.clearRect(0, 0, this.width, this.height)
+}
+
+Layer.prototype.toggleDirection = function () {
+  this.direction = this.direction === 'forward' ? 'back' : 'forward'
 }

@@ -1,6 +1,28 @@
+var horizontalLines = {
+  generateShapes: function () {
+    var yOffset = 0, spacing = 10, height = 5
+
+    while (yOffset < this.height) {
+      this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
+      yOffset += height + spacing
+    }
+  },
+  printShape: function (shape, index) {
+    this.context.fillStyle = 'blue'
+    this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
+  },
+  updateShape: function (shape, index) {
+    if (this.direction === 'forward') {
+      shape.y = (shape.y + 1) % this.height
+    } else {
+      shape.y  = shape.y > 0 ? shape.y - 1 : this.height
+    }
+  }
+}
+
 var verticalLines = {
   generateShapes: function () {
-    var xOffset = 0, spacing = 1, width = 5
+    var xOffset = 0, spacing = 2, width = 2
 
     while (xOffset < this.width) {
       this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
@@ -12,33 +34,19 @@ var verticalLines = {
     this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
   },
   updateShape: function (shape, index) {
-    shape.x = (shape.x + 1) % this.width
-  }
-}
-
-var horizontalLines = {
-  generateShapes: function () {
-    var yOffset = 0, spacing = 20, height = 10
-
-    while (yOffset < this.height) {
-      this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
-      yOffset += height + spacing
+    if (this.direction === 'forward') {
+      shape.x = (shape.x + 1) % this.width
+    } else {
+      shape.x = shape.x > 0 ?  shape.x - 1 : this.width
     }
-  },
-  printShape: function (shape, index) {
-    this.context.fillStyle = 'rgba(0,0,255,1)'
-    this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
-  },
-  updateShape: function (shape, index) {
-    shape.y = (shape.y + 1) % this.height
   }
 }
 
 var $layerNum = $('.layer-num')
 
 var layers = []
-layers.push(new Layer(verticalLines))
 layers.push(new Layer(horizontalLines))
+layers.push(new Layer(verticalLines))
 
 var currentLayer = layers[0]
 $(document).on('keyup', function (e) {
@@ -51,10 +59,10 @@ $(document).on('keyup', function (e) {
 
   switch (e.keyCode) {
     case 32:
-      currentLayer.toggleDisplay()
-      break;
+      currentLayer.toggleDisplay(); break;
     case 13:
-      currentLayer.toggleAnimation()
-      break;
+      currentLayer.toggleAnimation(); break;
+    case 68:
+      currentLayer.toggleDirection(); break;
   }
 })
