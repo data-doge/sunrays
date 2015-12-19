@@ -40,11 +40,17 @@ var layers = []
 layers.push(new Layer(verticalLines))
 layers.push(new Layer(horizontalLines))
 
-var layerNum = 0;
+var currentLayer = layers[0]
 $(document).on('keyup', function (e) {
   if (_.inRange(e.keyCode, 49, 58)) {
-    layerNum = e.keyCode - 49
-    layers[layerNum].toggleDisplay()
+    var layerNum = e.keyCode - 49
+    currentLayer = layers[layerNum]
     $layerNum.text(layerNum + 1)
+  }
+
+  switch (e.keyCode) {
+    case 32:
+      currentLayer.toggleDisplay()
+      break;
   }
 })
