@@ -1,6 +1,6 @@
 var layerParams0 = {
   generateShapes: function () {
-    var xOffset = 0, padding = 1, width = 4
+    var xOffset = 0, padding = 20, width = 100
 
     while (xOffset < this.width) {
       this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
@@ -16,10 +16,29 @@ var layerParams0 = {
   }
 }
 
-var layer = new Layer(layerParams0)
+var layerParams1 = {
+  generateShapes: function () {
+    var yOffset = 0, padding = 10, height = 10
+
+    while (yOffset < this.height) {
+      this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
+      yOffset += height + padding
+    }
+  },
+  printShape: function (shape, index) {
+    this.context.fillStyle = 'blue'
+    this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
+  },
+  updateShape: function (shape, index) {
+    shape.y = (shape.y + 1) % this.height
+  }
+}
+
+var layer0 = new Layer(layerParams0)
+var layer1 = new Layer(layerParams1)
 
 $(document).on('keyup', function (e) {
   if (e.keyCode === 32) {
-    layer.toggleAnimation()
+    layer0.toggleAnimation()
   }
 })
