@@ -25,9 +25,13 @@ Layer.prototype.prepareCanvas = function () {
 
 // will likely be a callback that we pass in for each distinct layer
 Layer.prototype.generateShapes = function () {
-  var xOffset = 0, padding = 30, width = 1
+  // padding 1 looks great
+  // width <= 5 is smooth
+  // around width > 5, get a lone wolf pair
+  // padding can be switched with width for inverse colors
+  var xOffset = 0, padding = 1, width = 4
 
-  while (xOffset + padding < this.width) {
+  while (xOffset < this.width) {
     this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
     xOffset += width + padding
   }
@@ -42,17 +46,22 @@ Layer.prototype.printShape = function (shape, index) {
   this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
 }
 
-// will also likely be a callback that we pass into each distinct layer
 Layer.prototype.animate = function () {
-  this.clear()
-  var width = this.width
-  this.shapes.forEach(function (shape, index) {
-    shape.x = (shape.x + 1) % width
-  })
+  this.updateShapes()
   if (this.isMoving) {
+    this.clear()
     this.printShapes()
     requestAnimationFrame(this.animate.bind(this))
   }
+}
+
+Layer.prototype.updateShapes = function () {
+  this.shapes.forEach(this.updateShape.bind(this))
+}
+
+// will also likely be a callback that we pass into each distinct layer
+Layer.prototype.updateShape = function (shape, index) {
+  shape.x = (shape.x + 1) % this.width
 }
 
 Layer.prototype.toggleAnimation = function () {
