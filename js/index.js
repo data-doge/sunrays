@@ -42,6 +42,7 @@ layers.push(new Layer(horizontalLines))
 
 var currentLayer = layers[0]
 $(document).on('keyup', function (e) {
+  console.log('e.keyCode: ', e.keyCode)
   if (_.inRange(e.keyCode, 49, 58)) {
     var layerNum = e.keyCode - 49
     currentLayer = layers[layerNum]
@@ -51,6 +52,9 @@ $(document).on('keyup', function (e) {
   switch (e.keyCode) {
     case 32:
       currentLayer.toggleDisplay()
+      break;
+    case 13:
+      currentLayer.toggleAnimation()
       break;
   }
 })
