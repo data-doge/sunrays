@@ -11,7 +11,7 @@ body {
 .frame {
   position: fixed;
   top: 0; left: 0; bottom: 0; right: 0;
-  border: 100px solid black;
+  border: 100px solid white;
   z-index: 1000;
 }
 
@@ -23,16 +23,27 @@ body {
   z-index: 1001;
 }
 
+
+.layer-num-background {
+  height: 50px;
+  width: 50px;
+  background: black;
+  border-radius: 50%;
+}
+
 .layer-num {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0 auto;
-  color: white;
   font-weight: lighter;
+  color: white;
 }
 
 canvas {
   display: block;
   position: absolute;
+}
+
+.centered {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 auto;
 }
