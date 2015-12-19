@@ -1,7 +1,8 @@
-function Layer () {
+function Layer (params) {
+  params = params || {}
   this.width = $(window).width()
   this.height = $(window).height()
-  this.context;
+  this.color = params.color || 'black'
   this.shapes = []
   this.initialize()
 }
@@ -9,6 +10,7 @@ function Layer () {
 Layer.prototype.initialize = function () {
   this.prepareCanvas()
   this.generateShapes()
+  this.printShapes()
 }
 
 Layer.prototype.prepareCanvas = function () {
@@ -21,16 +23,21 @@ Layer.prototype.prepareCanvas = function () {
 
 // will likely be a callback that we pass in for each distinct layer
 Layer.prototype.generateShapes = function () {
-  var xOffset = 0, padding = 20, width = 20, color = 'black'
+  var xOffset = 0, padding = 20, width = 20
 
   while (xOffset + padding < this.width) {
-    this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height, color: color })
+    this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
     xOffset += width + padding
   }
 }
 
 Layer.prototype.printShapes = function () {
-  // put a bunch of lines on the screen
+  this.shapes.forEach(this.printShape.bind(this))
+}
+
+// will also likely be a callback that we pass into each distinct layer
+Layer.prototype.printShape = function (shape, index) {
+  this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
 }
 
 Layer.prototype.animate = function () {
