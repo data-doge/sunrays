@@ -1,5 +1,4 @@
 var layerParams0 = {
-  color: 'black',
   generateShapes: function () {
     var xOffset = 0, padding = 1, width = 4
 
@@ -9,6 +8,7 @@ var layerParams0 = {
     }
   },
   printShape: function (shape, index) {
+    this.context.fillStyle = 'red'
     this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
   },
   updateShape: function (shape, index) {

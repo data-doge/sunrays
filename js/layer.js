@@ -6,7 +6,6 @@ function Layer (params) {
 Layer.prototype.loadParams = function (params) {
   this.width = $(window).width()
   this.height = $(window).height()
-  this.color = params.color
   this.generateShapes = params.generateShapes.bind(this)
   this.printShape = params.printShape.bind(this)
   this.updateShape = params.updateShape.bind(this)
