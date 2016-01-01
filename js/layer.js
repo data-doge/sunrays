@@ -1,3 +1,5 @@
+var $ = require('jquery')
+
 function Layer (params) {
   this.loadParams(params)
   this.initialize()
@@ -65,3 +67,5 @@ Layer.prototype.clear = function () {
 Layer.prototype.toggleDirection = function () {
   this.direction = this.direction === 'forward' ? 'back' : 'forward'
 }
+
+module.exports = Layer
