@@ -48,13 +48,21 @@ Layer.prototype.updateShapes = function () {
 }
 
 Layer.prototype.toggleAnimation = function () {
-  this.isMoving = !this.isMoving
-  if (this.isMoving) { this.animate() }
+  if (this.isDisplayed) {
+    this.isMoving = !this.isMoving
+    if (this.isMoving) { this.animate() }
+  }
 }
 
 Layer.prototype.toggleDisplay = function () {
-  this.isMoving = !this.isMoving
-  this.isDisplayed ? this.clear() : this.animate()
+
+  if (this.isDisplayed) {
+    this.isMoving = false
+    this.clear()
+  } else {
+    this.isMoving = true
+    this.animate()
+  }
   this.isDisplayed = !this.isDisplayed
 }
 
