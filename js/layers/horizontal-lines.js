@@ -15,7 +15,7 @@ var horizontalLines = stampit({
       this.context.fillStyle = 'blue'
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
-    updateShape: function (shape, index) {
+    updateShapePosition: function (shape, index) {
       shape.y  = shape.y > 0 ? shape.y - 1 : this.height
     },
     getPossibleDivisors: function () {

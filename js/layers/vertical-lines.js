@@ -15,7 +15,7 @@ var verticalLines = stampit({
       this.context.fillStyle = 'red'
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
-    updateShape: function (shape, index) {
+    updateShapePosition: function (shape, index) {
       shape.x = (shape.x + 1) % this.width
     },
     getPossibleDivisors: function () {

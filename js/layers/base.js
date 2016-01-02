@@ -25,15 +25,15 @@ var baseLayer = stampit({
       this.shapes.forEach(this.printShape.bind(this))
     },
     animate: function () {
-      this.updateShapes()
+      this.updateShapePositions()
       if (this.isMoving) {
         this.clear()
         this.printShapes()
         requestAnimationFrame(this.animate.bind(this))
       }
     },
-    updateShapes: function () {
-      this.shapes.forEach(this.updateShape.bind(this))
+    updateShapePositions: function () {
+      this.shapes.forEach(this.updateShapePosition.bind(this))
     },
     toggleAnimation: function () {
       this.isMoving = !this.isMoving
