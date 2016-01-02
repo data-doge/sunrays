@@ -1,7 +1,7 @@
 var $ = require('jquery')
 var stampit = require('stampit')
 
-var layer = stampit({
+var baseLayer = stampit({
   init: function () {
     this.width = $(window).width()
     this.height = $(window).height()
@@ -54,4 +54,4 @@ var layer = stampit({
   }
 })
 
-module.exports = layer
+module.exports = baseLayer
