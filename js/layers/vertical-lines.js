@@ -16,18 +16,14 @@ var verticalLines = stampit({
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
     updateShape: function (shape, index) {
-      if (this.direction === 'forward') {
-        shape.x = (shape.x + 1) % this.width
-      } else {
-        shape.x = shape.x > 0 ?  shape.x - 1 : this.width
-      }
+      shape.x = (shape.x + 1) % this.width
     },
     getPossibleDivisors: function () {
       return divisors(this.width, {proper: true})
     },
     getDefaultShapeParams: function () {
       var middleDivisor = median(this.getPossibleDivisors())
-      var width = Math.floor(middleDivisor / 1.01)
+      var width = Math.floor(middleDivisor / 1.1)
       var spacing = middleDivisor - width
       return { xOffset: 0, width: width, spacing: spacing }
     }

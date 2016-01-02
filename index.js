@@ -20,7 +20,5 @@ $(document).on('keyup', function (e) {
       currentLayer.toggleDisplay(); break;
     case 13:
       currentLayer.toggleAnimation(); break;
-    case 68:
-      currentLayer.toggleDirection(); break;
   }
 })

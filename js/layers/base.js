@@ -7,7 +7,6 @@ var baseLayer = stampit({
     this.height = $(window).height()
     this.isDisplayed = true
     this.isMoving = true
-    this.direction = 'forward'
     this.shapes = []
     this.prepareCanvas()
     this.generateShapes()
@@ -47,9 +46,6 @@ var baseLayer = stampit({
     },
     clear: function () {
       this.context.clearRect(0, 0, this.width, this.height)
-    },
-    toggleDirection: function () {
-      this.direction = this.direction === 'forward' ? 'back' : 'forward'
     }
   }
 })
