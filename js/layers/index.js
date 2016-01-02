@@ -4,7 +4,7 @@ var horizontalLines = require('./horizontal-lines')
 var verticalLines = require('./vertical-lines')
 
 var layers = [
-  // stampit.compose(horizontalLines, base)(),
+  stampit.compose(horizontalLines, base)(),
   stampit.compose(verticalLines, base)()
 ]
 

@@ -1,13 +1,14 @@
 var stampit = require('stampit')
+var divisors = require('array-math').divisors
+var median = require('median')
 
 var horizontalLines = stampit({
   methods: {
     generateShapes: function () {
-      var yOffset = 0, spacing = 10, height = 5
-
-      while (yOffset < this.height) {
-        this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
-        yOffset += height + spacing
+      var params = this.getDefaultShapeParams()
+      while (params.yOffset < this.height) {
+        this.shapes.push({ x: 0, y: params.yOffset, width: this.width, height: params.height})
+        params.yOffset += params.height + params.spacing
       }
     },
     printShape: function (shape, index) {
@@ -15,11 +16,16 @@ var horizontalLines = stampit({
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
     updateShape: function (shape, index) {
-      if (this.direction === 'forward') {
-        shape.y = (shape.y + 1) % this.height
-      } else {
-        shape.y  = shape.y > 0 ? shape.y - 1 : this.height
-      }
+      shape.y  = shape.y > 0 ? shape.y - 1 : this.height
+    },
+    getPossibleDivisors: function () {
+      return divisors(this.height, {proper: true})
+    },
+    getDefaultShapeParams: function () {
+      var middleDivisor = median(this.getPossibleDivisors())
+      var height = Math.floor(middleDivisor / 2)
+      var spacing = middleDivisor - height
+      return {yOffset: 0, height: height, spacing: spacing}
     }
   }
 })
