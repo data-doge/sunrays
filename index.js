@@ -1,58 +1,68 @@
 var $ = require('jquery')
 var _ = require('lodash')
-var Layer = require('./js/layer.js')
+var layer = require('./js/layer.js')
+var aMath = require('array-math')
+var stampit = require('stampit')
+function log (string) { console.log(string + ': ', eval(string)) }
 
-var horizontalLines = {
-  generateShapes: function () {
-    var yOffset = 0, spacing = 10, height = 5
+var horizontalLines = stampit({
+  methods: {
+    generateShapes: function () {
+      // var divisors = aMath.divisors(this.height, {proper: true})
+      // console.log('divisors: ', divisors)
+      var yOffset = 0, spacing = 10, height = 5
 
-    while (yOffset < this.height) {
-      this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
-      yOffset += height + spacing
-    }
-  },
-  printShape: function (shape, index) {
-    this.context.fillStyle = 'blue'
-    this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
-  },
-  updateShape: function (shape, index) {
-    if (this.direction === 'forward') {
-      shape.y = (shape.y + 1) % this.height
-    } else {
-      shape.y  = shape.y > 0 ? shape.y - 1 : this.height
-    }
-  }
-}
-
-var verticalLines = {
-  generateShapes: function () {
-    var xOffset = 0, spacing = 2, width = 2
-
-    while (xOffset < this.width) {
-      this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
-      xOffset += width + spacing
-    }
-  },
-  printShape: function (shape, index) {
-    this.context.fillStyle = 'red'
-    this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
-  },
-  updateShape: function (shape, index) {
-    if (this.direction === 'forward') {
-      shape.x = (shape.x + 1) % this.width
-    } else {
-      shape.x = shape.x > 0 ?  shape.x - 1 : this.width
+      while (yOffset < this.height) {
+        this.shapes.push({ x: 0, y: yOffset, width: this.width, height: height})
+        yOffset += height + spacing
+        console.log('yOffset: ', yOffset)
+      }
+    },
+    printShape: function (shape, index) {
+      this.context.fillStyle = 'blue'
+      this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
+    },
+    updateShape: function (shape, index) {
+      if (this.direction === 'forward') {
+        shape.y = (shape.y + 1) % this.height
+      } else {
+        shape.y  = shape.y > 0 ? shape.y - 1 : this.height
+      }
     }
   }
-}
+})
 
+var verticalLines = stampit({
+  methods: {
+    generateShapes: function () {
+      var xOffset = 0, spacing = 1, width = 2
 
+      while (xOffset < this.width) {
+        this.shapes.push({ x: xOffset, y: 0, width: width, height: this.height })
+        xOffset += width + spacing
+      }
+    },
+    printShape: function (shape, index) {
+      this.context.fillStyle = 'red'
+      this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
+    },
+    updateShape: function (shape, index) {
+      if (this.direction === 'forward') {
+        shape.x = (shape.x + 1) % this.width
+      } else {
+        shape.x = shape.x > 0 ?  shape.x - 1 : this.width
+      }
+    }
+  }
+})
 
 var $layerNum = $('.layer-num')
-
 var layers = []
-layers.push(new Layer(horizontalLines))
-layers.push(new Layer(verticalLines))
+var horizontalLinesLayer = stampit.compose(horizontalLines, layer)
+var verticalLinesLayer = stampit.compose(verticalLines, layer)
+
+layers.push(horizontalLinesLayer())
+layers.push(verticalLinesLayer())
 
 var currentLayer = layers[0]
 $(document).on('keyup', function (e) {
