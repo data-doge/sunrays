@@ -23,7 +23,7 @@ var verticalLines = stampit({
     },
     getDefaultShapeParams: function () {
       var middleDivisor = median(this.getPossibleDivisors())
-      var width = Math.floor(middleDivisor / 4)
+      var width = Math.floor(middleDivisor / 10)
       var spacing = middleDivisor - width
       return { xOffset: 0, width: width, spacing: spacing }
     }
