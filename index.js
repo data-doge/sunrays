@@ -6,6 +6,7 @@ var layers = require('./js/layers')
 var $layerNum = $('.layer-num')
 
 var currentLayer = layers[0]
+
 $(document).on('keyup', function (e) {
   console.log('e.keyCode: ', e.keyCode)
   if (_.inRange(e.keyCode, 49, 58)) {
