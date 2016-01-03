@@ -8,13 +8,11 @@ var verticalLines = stampit({
     generateShapes: function () {
       if (!this.shapeParams) {
         this.shapeParams = this.getDefaultShapeParams()
-      } else {
-        this.shapeParams.xOffset = 0
       }
-      var params = this.shapeParams
-      while (params.xOffset < this.width) {
-        this.shapes.push({ x: params.xOffset, y: 0, width: params.width, height: this.height })
-        params.xOffset += params.width + params.spacing
+      var params = this.shapeParams, xOffset = 0
+      while (xOffset < this.width) {
+        this.shapes.push({ x: xOffset, y: 0, width: params.width, height: this.height })
+        xOffset += params.width + params.spacing
       }
     },
     printShape: function (shape, index) {
@@ -35,7 +33,7 @@ var verticalLines = stampit({
       })
       var width = Math.floor(middleDivisor / 10)
       var spacing = middleDivisor - width
-      return { xOffset: 0, width: width, spacing: spacing }
+      return { width: width, spacing: spacing }
     },
     increaseSize: function () {
       if (this.divisorIndex < this.possibleDivisors.length - 1) {

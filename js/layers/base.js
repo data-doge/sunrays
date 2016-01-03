@@ -50,11 +50,8 @@ var baseLayer = stampit({
     },
     reset: function () {
       if (this.isMoving) {
-        this.toggleAnimation()
         this.shapes = []
         this.generateShapes()
-        this.printShapes()
-        this.toggleAnimation()
       }
     },
     changeEffect: function (isIncreasing) {
