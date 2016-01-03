@@ -44,7 +44,10 @@ var verticalLines = stampit({
       }
     },
     decreaseSize: function () {
-
+      if (this.divisorIndex > 1) {
+        this.divisorIndex--
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
+      }
     },
     currentDivisor: function () {
       return this.possibleDivisors[this.divisorIndex]
