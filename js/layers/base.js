@@ -11,6 +11,7 @@ var baseLayer = stampit({
     this.prepareCanvas()
     this.generateShapes()
     this.printShapes()
+    this.bindEffects()
     this.animate()
   },
   methods: {
@@ -46,6 +47,19 @@ var baseLayer = stampit({
     },
     clear: function () {
       this.context.clearRect(0, 0, this.width, this.height)
+    },
+    reset: function () {
+      if (this.isMoving) {
+        this.toggleAnimation()
+        this.shapes = []
+        this.generateShapes()
+        this.printShapes()
+        this.toggleAnimation()
+      }
+    },
+    changeEffect: function (isIncreasing) {
+      isIncreasing ? this.increaseEffect() : this.decreaseEffect()
+      this.reset()
     }
   }
 })
