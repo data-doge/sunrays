@@ -8,6 +8,7 @@ var baseLayer = stampit({
     this.isDisplayed = true
     this.isMoving = true
     this.stepLength = 1
+    this.effectValue = 0
     this.shapes = []
     this.prepareCanvas()
     this.setup()

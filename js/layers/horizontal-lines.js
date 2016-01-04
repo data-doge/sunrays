@@ -25,12 +25,14 @@ var horizontalLines = stampit({
     },
     increaseEffect: function () { // increases spacing
       if (this.divisorIndex < this.possibleDivisors.length - 1) {
+        this.effectValue++
         this.divisorIndex++
         this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.height
       }
     },
     decreaseEffect: function () { // decreases spacing
       if (this.divisorIndex > 1) {
+        this.effectValue--
         this.divisorIndex--
         this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.height
       }

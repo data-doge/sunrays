@@ -18,6 +18,7 @@ var layers = stampit({
       stampit.compose(verticalLines, base)()
     ]
     this.setTo(0)
+    this.updateIndicators()
   },
   methods: {
     setTo: function (layerNum) {
@@ -31,6 +32,7 @@ var layers = stampit({
       this.$displayedValue.text(this.current().isDisplayed)
       this.$animatedValue.text(this.current().isMoving)
       this.$speedValue.text(this.current().stepLength)
+      this.$effectValue.text(this.current().effectValue)
     },
 
     // private
