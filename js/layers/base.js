@@ -9,9 +9,9 @@ var baseLayer = stampit({
     this.isMoving = true
     this.shapes = []
     this.prepareCanvas()
+    this.setup()
     this.generateShapes()
     this.printShapes()
-    this.bindEffects()
     this.animate()
   },
   methods: {

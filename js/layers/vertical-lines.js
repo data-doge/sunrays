@@ -5,10 +5,11 @@ var _ = require('lodash')
 
 var verticalLines = stampit({
   methods: {
+    setup: function () {
+      this.possibleDivisors = divisors(this.width, {proper: true})
+      this.shapeParams = this.getDefaultShapeParams()
+    },
     generateShapes: function () {
-      if (!this.shapeParams) {
-        this.shapeParams = this.getDefaultShapeParams()
-      }
       var params = this.shapeParams, xOffset = 0
       while (xOffset < this.width) {
         this.shapes.push({ x: xOffset, y: 0, width: params.width, height: this.height })
@@ -22,11 +23,21 @@ var verticalLines = stampit({
     updateShapePosition: function (shape, index) {
       shape.x = (shape.x + 1) % this.width
     },
-    fetchPossibleDivisors: function () {
-      this.possibleDivisors = divisors(this.width, {proper: true})
+    increaseEffect: function () { // increases spacing
+      if (this.divisorIndex < this.possibleDivisors.length - 1) {
+        this.divisorIndex++
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
+      }
     },
+    decreaseEffect: function () { // decreases spacing
+      if (this.divisorIndex > 1) {
+        this.divisorIndex--
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
+      }
+    },
+
+    // private methods
     getDefaultShapeParams: function () {
-      this.fetchPossibleDivisors()
       var middleDivisor = median(this.possibleDivisors)
       this.divisorIndex = _.findIndex(this.possibleDivisors, function (divisor) {
         return divisor === middleDivisor
@@ -35,24 +46,8 @@ var verticalLines = stampit({
       var spacing = middleDivisor - width
       return { width: width, spacing: spacing }
     },
-    increaseSize: function () {
-      if (this.divisorIndex < this.possibleDivisors.length - 1) {
-        this.divisorIndex++
-        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
-      }
-    },
-    decreaseSize: function () {
-      if (this.divisorIndex > 1) {
-        this.divisorIndex--
-        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
-      }
-    },
     currentDivisor: function () {
       return this.possibleDivisors[this.divisorIndex]
-    },
-    bindEffects: function () {
-      this.increaseEffect = this.increaseSize
-      this.decreaseEffect = this.decreaseSize
     }
   }
 })
