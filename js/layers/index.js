@@ -30,7 +30,7 @@ var layers = stampit({
     updateIndicators: function () {
       this.$descriptionValue.text(this.current().description)
       this.$displayedValue.text(this.current().isDisplayed)
-      this.$animatedValue.text(this.current().isMoving)
+      this.$animatedValue.text(this.current().isAnimated)
       this.$speedValue.text(this.current().stepLength)
       this.$effectValue.text(this.current().effectValue)
     },
