@@ -7,7 +7,7 @@ var baseLayer = stampit({
     this.width = $('body').width()
     this.height = $('body').height()
     this.isDisplayed = true
-    this.isMoving = true
+    this.isAnimated = true
     this.stepLength = 1
     this.effectValue = 0
     this.shapes = []
@@ -30,7 +30,7 @@ var baseLayer = stampit({
     },
     animate: function () {
       this.updateShapePositions()
-      if (this.isMoving) {
+      if (this.isAnimated) {
         this.clear()
         this.printShapes()
         requestAnimationFrame(this.animate.bind(this))
@@ -40,11 +40,11 @@ var baseLayer = stampit({
       this.shapes.forEach(this.updateShapePosition.bind(this))
     },
     toggleAnimation: function () {
-      this.isMoving = !this.isMoving
-      if (this.isMoving) { this.animate() }
+      this.isAnimated = !this.isAnimated
+      if (this.isAnimated) { this.animate() }
     },
     toggleDisplay: function () {
-      this.isMoving = !this.isMoving
+      this.isAnimated = !this.isAnimated
       this.isDisplayed ? this.clear() : this.animate()
       this.isDisplayed = !this.isDisplayed
     },
@@ -52,7 +52,7 @@ var baseLayer = stampit({
       this.context.clearRect(0, 0, this.width, this.height)
     },
     reset: function () {
-      if (this.isMoving) {
+      if (this.isAnimated) {
         this.shapes = []
         this.generateShapes()
       }
