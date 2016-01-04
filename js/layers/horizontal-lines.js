@@ -4,28 +4,41 @@ var median = require('median')
 
 var horizontalLines = stampit({
   methods: {
+    setup: function () {
+      this.possibleDivisors = divisors(this.height, {proper: true})
+      this.divisorIndex = Math.floor(this.possibleDivisors.length / 2)
+      this.shapeParams = { height: 1, spacing: this.currentDivisor() - 1 }
+    },
     generateShapes: function () {
-      var params = this.getDefaultShapeParams()
-      while (params.yOffset < this.height) {
-        this.shapes.push({ x: 0, y: params.yOffset, width: this.width, height: params.height})
-        params.yOffset += params.height + params.spacing
+      var params = this.shapeParams, yOffset = 0
+      while (yOffset < this.height) {
+        this.shapes.push({ x: 0, y: yOffset, width: this.width, height: params.height})
+        yOffset += params.height + params.spacing
       }
     },
     printShape: function (shape, index) {
       this.context.fillStyle = 'blue'
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
-    updateShape: function (shape, index) {
+    updateShapePosition: function (shape, index) {
       shape.y  = shape.y > 0 ? shape.y - 1 : this.height
     },
-    getPossibleDivisors: function () {
-      return divisors(this.height, {proper: true})
+    increaseEffect: function () { // increases spacing
+      if (this.divisorIndex < this.possibleDivisors.length - 1) {
+        this.divisorIndex++
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.height
+      }
     },
-    getDefaultShapeParams: function () {
-      var middleDivisor = median(this.getPossibleDivisors())
-      var height = Math.floor(middleDivisor / 2)
-      var spacing = middleDivisor - height
-      return {yOffset: 0, height: height, spacing: spacing}
+    decreaseEffect: function () { // decreases spacing
+      if (this.divisorIndex > 1) {
+        this.divisorIndex--
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.height
+      }
+    },
+
+    // private
+    currentDivisor: function () {
+      return this.possibleDivisors[this.divisorIndex]
     }
   }
 })

@@ -4,28 +4,41 @@ var median = require('median')
 
 var verticalLines = stampit({
   methods: {
+    setup: function () {
+      this.possibleDivisors = divisors(this.width, {proper: true})
+      this.divisorIndex = Math.floor(this.possibleDivisors.length / 2)
+      this.shapeParams = { width: 2, spacing: this.currentDivisor() - 2 }
+    },
     generateShapes: function () {
-      var params = this.getDefaultShapeParams()
-      while (params.xOffset < this.width) {
-        this.shapes.push({ x: params.xOffset, y: 0, width: params.width, height: this.height })
-        params.xOffset += params.width + params.spacing
+      var params = this.shapeParams, xOffset = 0
+      while (xOffset < this.width) {
+        this.shapes.push({ x: xOffset, y: 0, width: params.width, height: this.height })
+        xOffset += params.width + params.spacing
       }
     },
     printShape: function (shape, index) {
       this.context.fillStyle = 'red'
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
-    updateShape: function (shape, index) {
+    updateShapePosition: function (shape, index) {
       shape.x = (shape.x + 1) % this.width
     },
-    getPossibleDivisors: function () {
-      return divisors(this.width, {proper: true})
+    increaseEffect: function () { // increases spacing
+      if (this.divisorIndex < this.possibleDivisors.length - 1) {
+        this.divisorIndex++
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
+      }
     },
-    getDefaultShapeParams: function () {
-      var middleDivisor = median(this.getPossibleDivisors())
-      var width = Math.floor(middleDivisor / 4)
-      var spacing = middleDivisor - width
-      return { xOffset: 0, width: width, spacing: spacing }
+    decreaseEffect: function () { // decreases spacing
+      if (this.divisorIndex > 1) {
+        this.divisorIndex--
+        this.shapeParams.spacing = this.currentDivisor() - this.shapeParams.width
+      }
+    },
+
+    // private
+    currentDivisor: function () {
+      return this.possibleDivisors[this.divisorIndex]
     }
   }
 })

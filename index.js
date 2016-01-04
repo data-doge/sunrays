@@ -16,9 +16,13 @@ $(document).on('keyup', function (e) {
   }
 
   switch (e.keyCode) {
-    case 32:
+    case 32: // enter
       currentLayer.toggleDisplay(); break;
-    case 13:
+    case 13: // space
       currentLayer.toggleAnimation(); break;
+    case 39: // right arrow
+      currentLayer.changeEffect(true); break;
+    case 37: // left arrow
+      currentLayer.changeEffect(false); break;
   }
 })

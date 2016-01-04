@@ -3,12 +3,13 @@ var stampit = require('stampit')
 
 var baseLayer = stampit({
   init: function () {
-    this.width = $(window).width()
-    this.height = $(window).height()
+    this.width = $('body').width()
+    this.height = $('body').height()
     this.isDisplayed = true
     this.isMoving = true
     this.shapes = []
     this.prepareCanvas()
+    this.setup()
     this.generateShapes()
     this.printShapes()
     this.animate()
@@ -25,15 +26,15 @@ var baseLayer = stampit({
       this.shapes.forEach(this.printShape.bind(this))
     },
     animate: function () {
-      this.updateShapes()
+      this.updateShapePositions()
       if (this.isMoving) {
         this.clear()
         this.printShapes()
         requestAnimationFrame(this.animate.bind(this))
       }
     },
-    updateShapes: function () {
-      this.shapes.forEach(this.updateShape.bind(this))
+    updateShapePositions: function () {
+      this.shapes.forEach(this.updateShapePosition.bind(this))
     },
     toggleAnimation: function () {
       this.isMoving = !this.isMoving
@@ -46,6 +47,16 @@ var baseLayer = stampit({
     },
     clear: function () {
       this.context.clearRect(0, 0, this.width, this.height)
+    },
+    reset: function () {
+      if (this.isMoving) {
+        this.shapes = []
+        this.generateShapes()
+      }
+    },
+    changeEffect: function (isIncreasing) {
+      isIncreasing ? this.increaseEffect() : this.decreaseEffect()
+      this.reset()
     }
   }
 })
