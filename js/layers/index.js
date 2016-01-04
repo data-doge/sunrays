@@ -12,6 +12,7 @@ var layers = stampit({
     this.$onValue = $('#on-value')
     this.$speedValue = $('#speed-value')
     this.$effectValue = $('#effect-value')
+    this.$depthValue = $('#depth-value')
     this.all = [
       stampit.compose(horizontalLines, base)(),
       stampit.compose(verticalLines, base)()
@@ -32,6 +33,7 @@ var layers = stampit({
       this.$onValue.text(this.current().isOn)
       this.$speedValue.text(this.current().stepLength)
       this.$effectValue.text(this.current().effectValue)
+      this.$depthValue.text(this.current().depth())
     },
     lowerCurrentLayer: function () {
       var layers = this.orderedByDepth()
