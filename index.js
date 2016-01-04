@@ -12,10 +12,8 @@ $(document).on('keyup', function (e) {
   }
 
   switch (e.keyCode) {
-    case 32: // enter
-      layers.current().toggleDisplay(); break;
-    case 13: // space
-      layers.current().toggleAnimation(); break;
+    case 32: // space
+      layers.current().toggle(); break;
     case 39: // right arrow
       layers.current().changeEffect(true); break;
     case 37: // left arrow

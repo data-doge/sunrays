@@ -9,8 +9,7 @@ var layers = stampit({
   init: function () {
     this.calibrateBody()
     this.$descriptionValue = $('#description-value')
-    this.$displayedValue = $('#displayed-value')
-    this.$animatedValue = $('#animated-value')
+    this.$onValue = $('#on-value')
     this.$speedValue = $('#speed-value')
     this.$effectValue = $('#effect-value')
     this.all = [
@@ -29,8 +28,7 @@ var layers = stampit({
     },
     updateIndicators: function () {
       this.$descriptionValue.text(this.current().description)
-      this.$displayedValue.text(this.current().isDisplayed)
-      this.$animatedValue.text(this.current().isAnimated)
+      this.$onValue.text(this.current().isOn)
       this.$speedValue.text(this.current().stepLength)
       this.$effectValue.text(this.current().effectValue)
     },
