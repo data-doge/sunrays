@@ -3,8 +3,8 @@ var stampit = require('stampit')
 
 var baseLayer = stampit({
   init: function () {
-    this.width = $(window).width()
-    this.height = $(window).height()
+    this.width = $('body').width()
+    this.height = $('body').height()
     this.isDisplayed = true
     this.isMoving = true
     this.shapes = []
