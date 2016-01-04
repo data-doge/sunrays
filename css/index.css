@@ -8,33 +8,6 @@ body {
   text-align: center;
 }
 
-.frame {
-  position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  border: 50px solid white;
-  z-index: 1000;
-}
-
-.layer-num-container {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  z-index: 1001;
-}
-
-.layer-num-background {
-  height: 50px;
-  width: 50px;
-  background: black;
-  border-radius: 50%;
-}
-
-.layer-num {
-  font-weight: lighter;
-  color: white;
-}
-
 canvas {
   display: block;
   position: absolute;
@@ -45,4 +18,28 @@ canvas {
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
+}
+
+.frame {
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  border: 50px solid white;
+  z-index: 1000;
+}
+
+.parameters {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  bottom: 0;
+  left: 50px;
+  right: 50px;
+  height: 50px;
+  color: black;
+  z-index: 2000;
+}
+
+.parameter {
+  flex-grow: 1;
 }

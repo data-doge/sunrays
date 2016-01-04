@@ -3,12 +3,15 @@ var _ = require('lodash')
 function log (string) { console.log(string + ': ', eval(string)) }
 var layers = require('./js/layers')
 
-var $layerNum = $('.layer-num')
+var $layerNum = $('#layer-no-value')
 
+// TODO: move to layers module
 var currentLayer = layers[0]
 
 $(document).on('keyup', function (e) {
   console.log('e.keyCode: ', e.keyCode)
+
+  // TODO: move to layers module
   if (_.inRange(e.keyCode, 49, 58)) {
     var layerNum = e.keyCode - 49
     currentLayer = layers[layerNum]
