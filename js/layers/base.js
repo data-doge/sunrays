@@ -51,14 +51,14 @@ var baseLayer = stampit({
         this.generateShapes()
       }
     },
-    changeEffect: function (isIncreasing) {
-      isIncreasing ? this.increaseEffect() : this.decreaseEffect()
+    changeEffect: function (dir) {
+      dir === 'up' ? this.increaseEffect() : this.decreaseEffect()
       this.reset()
     },
-    changeStepLength: function (isIncreasing) {
+    changeStepLength: function (dir) {
       this.reset()
-      if (isIncreasing && this.stepLength < 20) { this.stepLength++ }
-      if (!isIncreasing && this.stepLength > 0) { this.stepLength-- }
+      if (dir === 'up' && this.stepLength < 20) { this.stepLength++ }
+      if (dir === 'down' && this.stepLength > 0) { this.stepLength-- }
     },
     depth: function (newDepth) {
       if (newDepth) {
