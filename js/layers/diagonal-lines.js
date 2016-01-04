@@ -23,4 +23,4 @@ var diagonalLines = stampit({
   }
 })
 
-module.exports = diagonalLines()
+module.exports = diagonalLines
