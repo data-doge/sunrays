@@ -8,11 +8,11 @@ var verticalLines = require('./vertical-lines')
 // this ensures maximum subdivisions for patterns with repeating shapes
 // -- this will soon be a part of this layer's modules setup method
 var width = $('body').width()
-while (width % 5 !== 0) { width-- }
+while (width % 12 !== 0) { width-- }
 $('body').width(width)
 
 var height = $('body').height()
-while (height % 5 !== 0) { height-- }
+while (height % 12 !== 0) { height-- }
 $('body').height(height)
 
 var layers = [
