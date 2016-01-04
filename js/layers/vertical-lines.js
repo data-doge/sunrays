@@ -1,18 +1,13 @@
 var stampit = require('stampit')
 var divisors = require('array-math').divisors
 var median = require('median')
-var _ = require('lodash')
 
 var verticalLines = stampit({
   methods: {
-    // public
     setup: function () {
       this.possibleDivisors = divisors(this.width, {proper: true})
       this.divisorIndex = Math.floor(this.possibleDivisors.length / 2)
-      this.shapeParams = {
-        width: 2,
-        spacing: this.currentDivisor() - 2
-      }
+      this.shapeParams = { width: 2, spacing: this.currentDivisor() - 2 }
     },
     generateShapes: function () {
       var params = this.shapeParams, xOffset = 0
