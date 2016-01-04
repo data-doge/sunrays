@@ -60,9 +60,9 @@ var baseLayer = stampit({
       this.reset()
     },
     changeStepLength: function (isIncreasing) {
+      this.reset()
       if (isIncreasing && this.stepLength < 20) { this.stepLength++ }
       if (!isIncreasing && this.stepLength > 1) { this.stepLength-- }
-      this.reset()
     }
   }
 })
