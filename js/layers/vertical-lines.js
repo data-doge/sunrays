@@ -21,7 +21,7 @@ var verticalLines = stampit({
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
     updateShapePosition: function (shape, index) {
-      shape.x = (shape.x + 1) % this.width
+      shape.x = (shape.x + this.stepLength) % this.width
     },
     increaseEffect: function () { // increases spacing
       if (this.divisorIndex < this.possibleDivisors.length - 1) {

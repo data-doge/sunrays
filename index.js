@@ -24,5 +24,9 @@ $(document).on('keyup', function (e) {
       currentLayer.changeEffect(true); break;
     case 37: // left arrow
       currentLayer.changeEffect(false); break;
+    case 38: // up arrow
+      currentLayer.changeStepLength(true); break;
+    case 40: // down arrow
+      currentLayer.changeStepLength(false); break;
   }
 })

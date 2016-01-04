@@ -7,6 +7,7 @@ var baseLayer = stampit({
     this.height = $('body').height()
     this.isDisplayed = true
     this.isMoving = true
+    this.stepLength = 1
     this.shapes = []
     this.prepareCanvas()
     this.setup()
@@ -56,6 +57,11 @@ var baseLayer = stampit({
     },
     changeEffect: function (isIncreasing) {
       isIncreasing ? this.increaseEffect() : this.decreaseEffect()
+      this.reset()
+    },
+    changeStepLength: function (isIncreasing) {
+      if (isIncreasing && this.stepLength < 20) { this.stepLength++ }
+      if (!isIncreasing && this.stepLength > 1) { this.stepLength-- }
       this.reset()
     }
   }
