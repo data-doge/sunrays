@@ -8,11 +8,11 @@ var verticalLines = require('./vertical-lines')
 var layers = stampit({
   init: function () {
     this.calibrateBody()
-    this.$descriptionValue = $('#description-value')
-    this.$onValue = $('#on-value')
-    this.$speedValue = $('#speed-value')
-    this.$effectValue = $('#effect-value')
-    this.$depthValue = $('#depth-value')
+    this.$description = $('#description')
+    this.$on = $('#on')
+    this.$speed = $('#speed')
+    this.$effect = $('#effect')
+    this.$depth = $('#depth')
     this.all = [
       stampit.compose(horizontalLines, base)(),
       stampit.compose(verticalLines, base)()
@@ -29,11 +29,11 @@ var layers = stampit({
       return this.all[this.layerNum]
     },
     updateIndicators: function () {
-      this.$descriptionValue.text(this.current().description)
-      this.$onValue.text(this.current().isOn)
-      this.$speedValue.text(this.current().stepLength)
-      this.$effectValue.text(this.current().effectValue)
-      this.$depthValue.text(this.current().depth())
+      this.$description.text(this.current().description)
+      this.$on.text(this.current().isOn)
+      this.$speed.text(this.current().stepLength)
+      this.$effect.text(this.current().effectValue)
+      this.$depth.text(this.current().depth())
     },
     lowerCurrentLayer: function () {
       var layers = this.orderedByDepth()
