@@ -1,5 +1,6 @@
 var stampit = require('stampit')
 var divisors = require('array-math').divisors
+var gcd = require('gcd')
 
 var diagonalLines = stampit({
   init: function () {
@@ -7,8 +8,11 @@ var diagonalLines = stampit({
   },
   methods: {
     setup: function () {
+      this.possibleWidths = this.getPossibleWidths()
+      console.log('this.possibleWidths: ', this.possibleWidths)
     },
     generateShapes: function () {
+      // since body is calibrated, both x and y axes are subdivisible by 12
     },
     printShape: function (shape, index) {
     },
@@ -17,9 +21,12 @@ var diagonalLines = stampit({
     increaseEffect: function () {
     },
     decreaseEffect: function () {
-    }
+    },
 
     // private
+    getPossibleWidths: function () {
+      return divisors(gcd(this.width, this.height))
+    }
   }
 })
 

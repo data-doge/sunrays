@@ -4,6 +4,7 @@ var stampit = require('stampit')
 var base =  require('./base')
 var horizontalLines = require('./horizontal-lines')
 var verticalLines = require('./vertical-lines')
+var diagonalLines = require('./diagonal-lines')
 
 var layers = stampit({
   init: function () {
@@ -15,7 +16,8 @@ var layers = stampit({
     this.$depth = $('#depth')
     this.all = [
       stampit.compose(horizontalLines, base)(),
-      stampit.compose(verticalLines, base)()
+      stampit.compose(verticalLines, base)(),
+      stampit.compose(diagonalLines, base)()
     ]
     this.setDepths(this.all)
     this.setTo(0)
