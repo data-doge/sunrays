@@ -21,9 +21,7 @@ var horizontalLines = stampit({
       this.context.fillRect(shape.x, shape.y, shape.width, shape.height)
     },
     updateShapePosition: function (shape, index) {
-      // maybe this is where the off by 1 bug is coming from
       shape.y = (shape.y + this.stepLength) % this.height
-
     },
     increaseEffect: function () { // increases spacing
       if (this.divisorIndex < this.possibleDivisors.length - 1) {
