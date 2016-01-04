@@ -48,4 +48,4 @@ var verticalLines = stampit({
   }
 })
 
-module.exports = verticalLines
+module.exports = verticalLines()

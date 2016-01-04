@@ -48,4 +48,4 @@ var horizontalLines = stampit({
   }
 })
 
-module.exports = horizontalLines
+module.exports = horizontalLines()

@@ -14,8 +14,8 @@ var layers = stampit({
     this.$effect = $('#effect')
     this.$depth = $('#depth')
     this.all = [
-      stampit.compose(horizontalLines, base)(),
-      stampit.compose(verticalLines, base)()
+      stampit.compose(horizontalLines, base),
+      stampit.compose(verticalLines, base)
     ]
     this.setDepths(this.all)
     this.setTo(0)
