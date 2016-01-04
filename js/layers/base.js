@@ -4,6 +4,7 @@ var stampit = require('stampit')
 var baseLayer = stampit({
   init: function () {
     this.context = null
+    this.$canvas = $('<canvas></canvas>')
     this.width = $('body').width()
     this.height = $('body').height()
     this.isOn = true
@@ -18,11 +19,10 @@ var baseLayer = stampit({
   },
   methods: {
     prepareCanvas: function () {
-      var $canvas = $('<canvas></canvas>')
-      $canvas.attr('width', this.width)
-      $canvas.attr('height', this.height)
-      $('body').append($canvas)
-      this.context = $canvas[0].getContext('2d')
+      this.$canvas.attr('width', this.width)
+                  .attr('height', this.height)
+      $('body').append(this.$canvas)
+      this.context = this.$canvas[0].getContext('2d')
     },
     printShapes: function () {
       this.shapes.forEach(this.printShape.bind(this))
