@@ -21,11 +21,7 @@ var layers = stampit({
   },
   methods: {
     setTo: function (layerNum) {
-      console.log(layerNum);
-      if (_.inRange(layerNum, 10)) {
-        this.layerNum = layerNum
-        this.updateIndicators()
-      }
+      if (_.inRange(layerNum, 10)) { this.layerNum = layerNum }
     },
     current: function () {
       return this.all[this.layerNum]

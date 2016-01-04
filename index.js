@@ -25,4 +25,6 @@ $(document).on('keyup', function (e) {
     case 40: // down arrow
       layers.current().changeStepLength(false); break;
   }
+
+  layers.updateIndicators()
 })
