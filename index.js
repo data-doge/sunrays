@@ -22,6 +22,10 @@ $(document).on('keyup', function (e) {
       layers.current().changeStepLength(true); break;
     case 40: // down arrow
       layers.current().changeStepLength(false); break;
+    case 189: // minus
+      layers.lowerCurrentLayer(); break;
+    case 187: // plus
+      break;
   }
 
   layers.updateIndicators()

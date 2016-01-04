@@ -16,7 +16,7 @@ var layers = stampit({
       stampit.compose(horizontalLines, base)(),
       stampit.compose(verticalLines, base)()
     ]
-    this.initializeLayerDepths()
+    this.setDepths(this.all)
     this.setTo(0)
     this.updateIndicators()
   },
@@ -33,6 +33,22 @@ var layers = stampit({
       this.$speedValue.text(this.current().stepLength)
       this.$effectValue.text(this.current().effectValue)
     },
+    lowerCurrentLayer: function () {
+      var layers = this.orderedByDepth()
+      var isCurrentLayer = function (layer, index) {
+        return layer === this.current()
+      }
+      var layerIndex = layers.findIndex(isCurrentLayer.bind(this))
+      if (layerIndex > 0) {
+        console.log('meow')
+        var lowerLayer = layers[layerIndex - 1]
+        layers[layerIndex - 1] = this.current()
+        layers[layerIndex] = lowerLayer
+        this.setDepths(layers)
+      }
+    },
+    raiseCurrentLayer: function () {
+    },
 
     // private
     calibrateBody: function () {
@@ -46,8 +62,8 @@ var layers = stampit({
         return layer.$canvas.css('z-index')
       })
     },
-    initializeLayerDepths: function () {
-      this.all.forEach(function (layer, index) {
+    setDepths: function (layers) {
+      layers.forEach(function (layer, index) {
         layer.depth(index + 1)
       })
     }
