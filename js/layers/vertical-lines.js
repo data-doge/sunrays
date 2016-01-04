@@ -5,9 +5,14 @@ var _ = require('lodash')
 
 var verticalLines = stampit({
   methods: {
+    // public
     setup: function () {
       this.possibleDivisors = divisors(this.width, {proper: true})
-      this.shapeParams = this.getDefaultShapeParams()
+      this.divisorIndex = Math.floor(this.possibleDivisors.length / 2)
+      this.shapeParams = {
+        width: 2,
+        spacing: this.currentDivisor() - 2
+      }
     },
     generateShapes: function () {
       var params = this.shapeParams, xOffset = 0
@@ -36,16 +41,7 @@ var verticalLines = stampit({
       }
     },
 
-    // private methods
-    getDefaultShapeParams: function () {
-      var middleDivisor = median(this.possibleDivisors)
-      this.divisorIndex = _.findIndex(this.possibleDivisors, function (divisor) {
-        return divisor === middleDivisor
-      })
-      var width = Math.floor(middleDivisor / 10)
-      var spacing = middleDivisor - width
-      return { width: width, spacing: spacing }
-    },
+    // private
     currentDivisor: function () {
       return this.possibleDivisors[this.divisorIndex]
     }
