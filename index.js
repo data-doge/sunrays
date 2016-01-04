@@ -3,9 +3,7 @@ var _ = require('lodash')
 function log (string) { console.log(string + ': ', eval(string)) }
 var layers = require('./js/layers')
 
-$(document).on('keyup', function (e) {
-  console.log('e.keyCode: ', e.keyCode)
-
+$(document).on('keydown', function (e) {
   if (_.inRange(e.keyCode, 49, 58)) {
     var layerNum = e.keyCode - 49
     layers.setTo(layerNum)
