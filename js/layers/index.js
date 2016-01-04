@@ -35,12 +35,8 @@ var layers = stampit({
     },
     lowerCurrentLayer: function () {
       var layers = this.orderedByDepth()
-      var isCurrentLayer = function (layer, index) {
-        return layer === this.current()
-      }
-      var layerIndex = layers.findIndex(isCurrentLayer.bind(this))
+      var layerIndex = layers.findIndex(this.isCurrentLayer.bind(this))
       if (layerIndex > 0) {
-        console.log('meow')
         var lowerLayer = layers[layerIndex - 1]
         layers[layerIndex - 1] = this.current()
         layers[layerIndex] = lowerLayer
@@ -48,6 +44,14 @@ var layers = stampit({
       }
     },
     raiseCurrentLayer: function () {
+      var layers = this.orderedByDepth()
+      var layerIndex = layers.findIndex(this.isCurrentLayer.bind(this))
+      if (layerIndex < layers.length - 1) {
+        var higherLayer = layers[layerIndex + 1]
+        layers[layerIndex + 1] = this.current()
+        layers[layerIndex] = higherLayer
+        this.setDepths(layers)
+      }
     },
 
     // private
@@ -66,6 +70,9 @@ var layers = stampit({
       layers.forEach(function (layer, index) {
         layer.depth(index + 1)
       })
+    },
+    isCurrentLayer: function (layer, index) {
+      return layer === this.current()
     }
   }
 })

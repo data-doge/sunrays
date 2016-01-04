@@ -25,7 +25,7 @@ $(document).on('keyup', function (e) {
     case 189: // minus
       layers.lowerCurrentLayer(); break;
     case 187: // plus
-      break;
+      layers.raiseCurrentLayer(); break;
   }
 
   layers.updateIndicators()
