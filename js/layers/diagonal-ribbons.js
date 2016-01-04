@@ -23,11 +23,11 @@ var diagonalRibbons = stampit({
           x2: x2 + offset,
           y2: y2 + offset
         })
-        offset += sqrt(2) * ribbonWidth
+        offset += sqrt(2) * ribbonWidth * 2
       }
     },
     printShape: function (shape, index) {
-      this.drawRibbon(shape.x1, shape.y1, shape.x2, shape.y2)
+      this.drawRibbon(shape.x1, shape.y1, shape.x2, shape.y2, this.currentWidth())
     },
     updateShapePosition: function (shape, index) {
     },
@@ -43,12 +43,14 @@ var diagonalRibbons = stampit({
     currentWidth: function () {
       return this.possibleWidths[this.widthIndex]
     },
-    drawRibbon: function (x1, y1, x2, y2) {
+    drawRibbon: function (x1, y1, x2, y2, w) {
       this.context.beginPath()
       this.context.moveTo(x1, y1)
       this.context.lineTo(x2, y2)
+      this.context.lineTo(x2 + sqrt(2) * w, y2 + sqrt(2) * w)
+      this.context.lineTo(x1 + sqrt(2) * w, y1 + sqrt(2) * w)
       this.context.closePath()
-      this.context.stroke()
+      this.context.fill()
     }
   }
 })
