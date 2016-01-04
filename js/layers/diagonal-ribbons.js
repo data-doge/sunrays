@@ -2,9 +2,9 @@ var stampit = require('stampit')
 var divisors = require('array-math').divisors
 var gcd = require('gcd')
 
-var diagonalLines = stampit({
+var diagonalRibbons = stampit({
   init: function () {
-    this.description = 'diagonal lines'
+    this.description = 'diagonal ribbons'
   },
   methods: {
     setup: function () {
@@ -30,4 +30,4 @@ var diagonalLines = stampit({
   }
 })
 
-module.exports = diagonalLines
+module.exports = diagonalRibbons
