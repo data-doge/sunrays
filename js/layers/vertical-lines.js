@@ -3,6 +3,9 @@ var divisors = require('array-math').divisors
 var median = require('median')
 
 var verticalLines = stampit({
+  init: function () {
+    this.description = 'vertical lines'
+  },
   methods: {
     setup: function () {
       this.possibleDivisors = divisors(this.width, {proper: true})

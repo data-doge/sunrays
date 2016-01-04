@@ -3,6 +3,7 @@ var stampit = require('stampit')
 
 var baseLayer = stampit({
   init: function () {
+    this.context = null
     this.width = $('body').width()
     this.height = $('body').height()
     this.isDisplayed = true

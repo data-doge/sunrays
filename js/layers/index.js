@@ -8,7 +8,7 @@ var verticalLines = require('./vertical-lines')
 var layers = stampit({
   init: function () {
     this.calibrateBody()
-    this.$layerValue = $('#layer-value')
+    this.$descriptionValue = $('#description-value')
     this.$displayedValue = $('#displayed-value')
     this.$animatedValue = $('#animated-value')
     this.$speedValue = $('#speed-value')
@@ -28,7 +28,7 @@ var layers = stampit({
       return this.all[this.layerNum]
     },
     updateIndicators: function () {
-      this.$layerValue.text(this.layerNum + 1)
+      this.$descriptionValue.text(this.current().description)
       this.$displayedValue.text(this.current().isDisplayed)
       this.$animatedValue.text(this.current().isMoving)
       this.$speedValue.text(this.current().stepLength)
