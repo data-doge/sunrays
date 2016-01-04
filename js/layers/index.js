@@ -16,6 +16,7 @@ var layers = stampit({
       stampit.compose(horizontalLines, base)(),
       stampit.compose(verticalLines, base)()
     ]
+    this.initializeLayerDepths()
     this.setTo(0)
     this.updateIndicators()
   },
@@ -39,6 +40,16 @@ var layers = stampit({
       while (width % 12 !== 0) { width-- }
       while (height % 12 !== 0) { height-- }
       $('body').css({width: width, height: height})
+    },
+    orderedByDepth: function () {
+      return _.sortBy(this.all, function (layer) {
+        return layer.$canvas.css('z-index')
+      })
+    },
+    initializeLayerDepths: function () {
+      this.all.forEach(function (layer, index) {
+        layer.depth(index + 1)
+      })
     }
   }
 })

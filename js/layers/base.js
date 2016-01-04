@@ -59,6 +59,13 @@ var baseLayer = stampit({
       this.reset()
       if (isIncreasing && this.stepLength < 20) { this.stepLength++ }
       if (!isIncreasing && this.stepLength > 0) { this.stepLength-- }
+    },
+    depth: function (newDepth) {
+      if (newDepth) {
+        this.$canvas.css('z-index', newDepth)
+      } else {
+        return this.$canvas.css('z-index')
+      }
     }
   }
 })
