@@ -28,11 +28,11 @@ var diagonalRibbons = stampit({
       var initialCoords = this.ribbonCoords(0)
       var x1Max = initialCoords.x2, operation = null
       if (shape.x1 < x1Max) {
-        operation = function (value, key) { shape[key]++ }
+        operation = function (value, key) { shape[key] += this.currentStepSize() / 2 }
       } else {
-        operation = function (value, key) { shape[key] = initialCoords[key]}
+        operation = function (value, key) { shape[key] = initialCoords[key] }
       }
-      _.each(shape, operation)
+      _.each(shape, operation.bind(this))
     },
     increaseEffect: function () {
     },
