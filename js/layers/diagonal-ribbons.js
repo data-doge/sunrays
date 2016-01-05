@@ -26,16 +26,13 @@ var diagonalRibbons = stampit({
     },
     updateShapePosition: function (shape, index) {
       var initialCoords = this.ribbonCoords(0)
-      var x1Max = initialCoords.x2
-      console.log(shape.x1)
+      var x1Max = initialCoords.x2, operation = null
       if (shape.x1 < x1Max) {
-        shape.x1++; shape.y1++; shape.x2++; shape.y2++
+        operation = function (value, key) { shape[key]++ }
       } else {
-        shape.x1 = initialCoords.x1
-        shape.y1 = initialCoords.y1
-        shape.x2 = initialCoords.x2
-        shape.y2 = initialCoords.y2
+        operation = function (value, key) { shape[key] = initialCoords[key]}
       }
+      _.each(shape, operation)
     },
     increaseEffect: function () {
     },
