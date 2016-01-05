@@ -2,6 +2,7 @@ var stampit = require('stampit')
 var divisors = require('array-math').divisors
 var gcd = require('gcd')
 var sqrt = require('sqrt')
+var _ = require('lodash')
 
 var diagonalRibbons = stampit({
   init: function () {
@@ -14,22 +15,27 @@ var diagonalRibbons = stampit({
       console.log('this.possibleWidths: ', this.possibleWidths)
     },
     generateShapes: function () {
-      var ribbonWidth = this.currentWidth(), offset = 0
+      var offset = 0
       while (offset < this.width) {
-        var x1 = -this.height / 2, y1 = -x1, x2 = this.width / 2, y2 = -x2
-        this.shapes.push({
-          x1: x1 + offset,
-          y1: y1 + offset,
-          x2: x2 + offset,
-          y2: y2 + offset
-        })
-        offset += sqrt(2) * ribbonWidth * 2
+        this.shapes.push(this.ribbonCoords(offset))
+        offset += this.currentStepSize() * 2
       }
     },
     printShape: function (shape, index) {
       this.drawRibbon(shape.x1, shape.y1, shape.x2, shape.y2, this.currentWidth())
     },
     updateShapePosition: function (shape, index) {
+      var initialCoords = this.ribbonCoords(0)
+      var x1Max = initialCoords.x2
+      console.log(shape.x1)
+      if (shape.x1 < x1Max) {
+        shape.x1++; shape.y1++; shape.x2++; shape.y2++
+      } else {
+        shape.x1 = initialCoords.x1
+        shape.y1 = initialCoords.y1
+        shape.x2 = initialCoords.x2
+        shape.y2 = initialCoords.y2
+      }
     },
     increaseEffect: function () {
     },
@@ -43,14 +49,26 @@ var diagonalRibbons = stampit({
     currentWidth: function () {
       return this.possibleWidths[this.widthIndex]
     },
-    drawRibbon: function (x1, y1, x2, y2, w) {
+    currentStepSize: function () {
+      return this.currentWidth() * sqrt(2)
+    },
+    drawRibbon: function (x1, y1, x2, y2) {
       this.context.beginPath()
       this.context.moveTo(x1, y1)
       this.context.lineTo(x2, y2)
-      this.context.lineTo(x2 + sqrt(2) * w, y2 + sqrt(2) * w)
-      this.context.lineTo(x1 + sqrt(2) * w, y1 + sqrt(2) * w)
+      this.context.lineTo(x2 + this.currentStepSize(), y2 + this.currentStepSize())
+      this.context.lineTo(x1 + this.currentStepSize(), y1 + this.currentStepSize())
       this.context.closePath()
       this.context.fill()
+    },
+    ribbonCoords: function (offset) {
+      var x1 = -this.height / 2, y1 = -x1, x2 = this.width / 2, y2 = -x2
+      return {
+        x1: x1 + offset,
+        y1: y1 + offset,
+        x2: x2 + offset,
+        y2: y2 + offset
+      }
     }
   }
 })
